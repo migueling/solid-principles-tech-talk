@@ -1,0 +1,45 @@
+// Interface Segregation Principle - Solution
+
+interface ProfileViewer {
+    void viewProfile();
+}
+
+interface ProfileEditor {
+    void editProfile();
+}
+
+interface ReportViewer {
+    void viewReports();
+}
+
+interface ReportGenerator {
+    void generateReports();
+}
+
+class RegularUser implements ProfileViewer, ProfileEditor {
+    public void viewProfile() {
+        System.out.println("Viewing profile");
+    }
+
+    public void editProfile() {
+        System.out.println("Editing profile");
+    }
+}
+
+class AdminUser implements ProfileViewer, ProfileEditor, ReportViewer, ReportGenerator {
+    public void viewProfile() {
+        System.out.println("Viewing profile");
+    }
+
+    public void editProfile() {
+        System.out.println("Editing profile");
+    }
+
+    public void viewReports() {
+        System.out.println("Viewing reports");
+    }
+
+    public void generateReports() {
+        System.out.println("Generating reports");
+    }
+}

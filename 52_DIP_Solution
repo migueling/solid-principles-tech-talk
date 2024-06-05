@@ -1,0 +1,45 @@
+// Dependency Inversion Principle - Solution
+
+interface UserRepository {
+    void saveUser(String user);
+}
+
+class MySQLUserRepository implements UserRepository {
+    public void saveUser(String user) {
+        System.out.println("Saving user to MySQL database: " + user);
+    }
+}
+
+class MongoDBUserRepository implements UserRepository {
+    public void saveUser(String user) {
+        System.out.println("Saving user to MongoDB database: " + user);
+    }
+}
+
+// Now, UserService depends on the UserRepository interface, not on a specific implementation.
+
+class UserService {
+    private UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public void addUser(String user) {
+        userRepository.saveUser(user);
+    }
+}
+
+// Usage
+
+public class Main {
+    public static void main(String[] args) {
+        UserRepository mySQLRepo = new MySQLUserRepository();
+        UserService userService = new UserService(mySQLRepo);
+        userService.addUser("John Doe");
+
+        UserRepository mongoDBRepo = new MongoDBUserRepository();
+        UserService userServiceWithMongoDB = new UserService(mongoDBRepo);
+        userServiceWithMongoDB.addUser("Jane Doe");
+    }
+}

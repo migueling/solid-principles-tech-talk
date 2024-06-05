@@ -1,0 +1,44 @@
+// Interface Segregation Principle - Violation
+
+interface User {
+    void viewProfile();
+    void editProfile();
+    void viewReports();
+    void generateReports();
+}
+
+class RegularUser implements User {
+    public void viewProfile() {
+        System.out.println("Viewing profile");
+    }
+
+    public void editProfile() {
+        System.out.println("Editing profile");
+    }
+
+    public void viewReports() {
+        throw new UnsupportedOperationException("Regular users cannot view reports");
+    }
+
+    public void generateReports() {
+        throw new UnsupportedOperationException("Regular users cannot generate reports");
+    }
+}
+
+class AdminUser implements User {
+    public void viewProfile() {
+        System.out.println("Viewing profile");
+    }
+
+    public void editProfile() {
+        System.out.println("Editing profile");
+    }
+
+    public void viewReports() {
+        System.out.println("Viewing reports");
+    }
+
+    public void generateReports() {
+        System.out.println("Generating reports");
+    }
+}

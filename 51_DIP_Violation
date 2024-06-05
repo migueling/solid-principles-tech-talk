@@ -1,0 +1,24 @@
+// Dependency Inversion Principle - Violation
+
+// A high-level module UserService directly depends on a low-level module MySQLUserRepository.
+
+class MySQLUserRepository {
+    public void saveUser(String user) {
+        System.out.println("Saving user to MySQL database: " + user);
+    }
+}
+
+// Here, UserService is tightly coupled with MySQLUserRepository.
+// If you need to switch to MongoDB, you have to modify UserService, breaking the Open/Closed Principle
+
+class UserService {
+    private MySQLUserRepository userRepository;
+
+    public UserService() {
+        this.userRepository = new MySQLUserRepository();
+    }
+
+    public void addUser(String user) {
+        userRepository.saveUser(user);
+    }
+}

@@ -1,0 +1,51 @@
+// Liskov Substitution Principle - Solution
+
+class Bird {
+    public void eat() {
+        System.out.println("Bird is eating");
+    }
+}
+
+class FlyingBird extends Bird {
+    public void fly() {
+        System.out.println("Bird is flying");
+    }
+}
+
+class Sparrow extends FlyingBird {
+    @Override
+    public void eat() {
+        System.out.println("Sparrow is eating");
+    }
+
+    @Override
+    public void fly() {
+        System.out.println("Sparrow is flying");
+    }
+}
+
+class Penguin extends Bird {
+    @Override
+    public void eat() {
+        System.out.println("Penguin is eating");
+    }
+}
+
+// Usage
+
+public class Main {
+    public static void releaseAllBirds(List<FlyingBird> birds) {
+        for (FlyingBird bird : birds) {
+            bird.fly();
+        }
+    }
+
+    public static void main(String[] args) {
+        FlyingBird sparrow = new Sparrow();
+
+        List<FlyingBird> birds = new ArrayList<>();
+        birds.add(sparrow);
+
+        releaseAllBirds(birds);
+    }
+}
